@@ -10,33 +10,92 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as FavoritRouteImport } from './routes/favorit'
+import { Route as KatalogRouteImport } from './routes/katalog'
+import { Route as KategoriRouteImport } from './routes/kategori'
+import { Route as KeranjangRouteImport } from './routes/keranjang'
+import { Route as ProdukSlugRouteImport } from './routes/produk.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FavoritRoute = FavoritRouteImport.update({
+  id: '/favorit',
+  path: '/favorit',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KatalogRoute = KatalogRouteImport.update({
+  id: '/katalog',
+  path: '/katalog',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KategoriRoute = KategoriRouteImport.update({
+  id: '/kategori',
+  path: '/kategori',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KeranjangRoute = KeranjangRouteImport.update({
+  id: '/keranjang',
+  path: '/keranjang',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProdukSlugRoute = ProdukSlugRouteImport.update({
+  id: '/produk/$slug',
+  path: '/produk/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/favorit': typeof FavoritRoute
+  '/katalog': typeof KatalogRoute
+  '/kategori': typeof KategoriRoute
+  '/keranjang': typeof KeranjangRoute
+  '/produk/$slug': typeof ProdukSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/favorit': typeof FavoritRoute
+  '/katalog': typeof KatalogRoute
+  '/kategori': typeof KategoriRoute
+  '/keranjang': typeof KeranjangRoute
+  '/produk/$slug': typeof ProdukSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/favorit': typeof FavoritRoute
+  '/katalog': typeof KatalogRoute
+  '/kategori': typeof KategoriRoute
+  '/keranjang': typeof KeranjangRoute
+  '/produk/$slug': typeof ProdukSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    '/' | '/favorit' | '/katalog' | '/kategori' | '/keranjang' | '/produk/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    '/' | '/favorit' | '/katalog' | '/kategori' | '/keranjang' | '/produk/$slug'
+  id:
+    | '__root__'
+    | '/'
+    | '/favorit'
+    | '/katalog'
+    | '/kategori'
+    | '/keranjang'
+    | '/produk/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  FavoritRoute: typeof FavoritRoute
+  KatalogRoute: typeof KatalogRoute
+  KategoriRoute: typeof KategoriRoute
+  KeranjangRoute: typeof KeranjangRoute
+  ProdukSlugRoute: typeof ProdukSlugRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +107,51 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/favorit': {
+      id: '/favorit'
+      path: '/favorit'
+      fullPath: '/favorit'
+      preLoaderRoute: typeof FavoritRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/katalog': {
+      id: '/katalog'
+      path: '/katalog'
+      fullPath: '/katalog'
+      preLoaderRoute: typeof KatalogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/kategori': {
+      id: '/kategori'
+      path: '/kategori'
+      fullPath: '/kategori'
+      preLoaderRoute: typeof KategoriRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/keranjang': {
+      id: '/keranjang'
+      path: '/keranjang'
+      fullPath: '/keranjang'
+      preLoaderRoute: typeof KeranjangRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/produk/$slug': {
+      id: '/produk/$slug'
+      path: '/produk/$slug'
+      fullPath: '/produk/$slug'
+      preLoaderRoute: typeof ProdukSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  FavoritRoute: FavoritRoute,
+  KatalogRoute: KatalogRoute,
+  KategoriRoute: KategoriRoute,
+  KeranjangRoute: KeranjangRoute,
+  ProdukSlugRoute: ProdukSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
