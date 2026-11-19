@@ -55,7 +55,7 @@ export function ProductVisual({
             big
               ? "h-24 w-24 rounded-3xl"
               : small
-                ? "h-10 w-10 rounded-xl"
+                ? "h-8 w-8 rounded-lg border-[1.5px] shadow-none"
                 : "h-14 w-14 sm:h-16 sm:w-16",
           )}
         >
