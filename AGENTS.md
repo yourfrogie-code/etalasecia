@@ -28,3 +28,10 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project rules
+- Store identity (name, WhatsApp number, testimonial link, hero/profile/FAQ copy) lives only in `src/config/store.ts`; components read from it so rebranding needs no component edits.
+- Catalog lives in `src/data/products.ts` (prices written in thousands via `plan()` helper); seller notes are shown verbatim.
+- Cart, wishlist, recently viewed and order note persist in localStorage via `src/lib/store-state.tsx` (no backend by design).
+- WhatsApp messages are built only in `src/lib/whatsapp.ts` (wa.me + encodeURIComponent); covered by `src/test/store-rules.test.ts`.
+- Colors are tokens in `src/styles.css`: `ink` flips light in dark mode (borders/tags), `deep` stays dark (footer, promo, announcement).

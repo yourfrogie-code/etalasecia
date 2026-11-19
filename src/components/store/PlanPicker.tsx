@@ -18,14 +18,25 @@ export function defaultSelection(product: Product): PlanSelection {
 }
 
 /** Pilihan paket (tab) + durasi (kartu harga) yang interaktif. */
-export function PlanPicker({ product, value, onChange }: { product: Product; value: PlanSelection; onChange: (v: PlanSelection) => void }) {
+export function PlanPicker({
+  product,
+  value,
+  onChange,
+}: {
+  product: Product;
+  value: PlanSelection;
+  onChange: (v: PlanSelection) => void;
+}) {
   const plan = product.plans.find((p) => p.id === value.planId) ?? product.plans[0];
+  if (!plan) return null;
 
   return (
     <div className="space-y-4">
       {product.plans.length > 1 && (
         <div>
-          <p className="mb-2 font-display text-sm font-semibold text-muted-foreground">1. Pilih paket</p>
+          <p className="mb-2 font-display text-sm font-semibold text-muted-foreground">
+            1. Pilih paket
+          </p>
           <div className="no-scrollbar -mx-1 flex gap-2 overflow-x-auto px-1 pb-1">
             {product.plans.map((p) => {
               const active = p.id === plan.id;
@@ -41,7 +52,9 @@ export function PlanPicker({ product, value, onChange }: { product: Product; val
                   }}
                   className={cn(
                     "shrink-0 rounded-full border-2 px-4 py-2 font-display text-sm font-semibold transition-all",
-                    active ? "border-ink bg-ink text-ink-foreground shadow-sticker-sm" : "border-border bg-card hover:border-ink",
+                    active
+                      ? "border-ink bg-ink text-ink-foreground shadow-sticker-sm"
+                      : "border-border bg-card hover:border-ink",
                     !usable && "cursor-not-allowed opacity-50 line-through",
                   )}
                 >
@@ -80,7 +93,9 @@ export function PlanPicker({ product, value, onChange }: { product: Product; val
                 onClick={() => onChange({ planId: plan.id, optionId: o.id })}
                 className={cn(
                   "relative flex min-h-20 flex-col items-start justify-between rounded-2xl border-2 p-3 text-left transition-all",
-                  active ? "border-ink bg-primary text-primary-foreground shadow-sticker-sm -translate-y-0.5" : "border-border bg-card hover:border-ink",
+                  active
+                    ? "border-ink bg-primary text-primary-foreground shadow-sticker-sm -translate-y-0.5"
+                    : "border-border bg-card hover:border-ink",
                   disabled && "cursor-not-allowed opacity-50",
                 )}
               >
@@ -89,10 +104,19 @@ export function PlanPicker({ product, value, onChange }: { product: Product; val
                     hemat {pct}%
                   </span>
                 )}
-                <span className="pr-4 text-xs font-bold leading-tight">{o.label === "-" ? "Belum tersedia" : o.label}</span>
-                <span className="mt-1 font-display text-base font-bold">{disabled ? "Habis" : formatRupiah(o.price)}</span>
+                <span className="pr-4 text-xs font-bold leading-tight">
+                  {o.label === "-" ? "Belum tersedia" : o.label}
+                </span>
+                <span className="mt-1 font-display text-base font-bold">
+                  {disabled ? "Habis" : formatRupiah(o.price)}
+                </span>
                 {perDay && !disabled && (
-                  <span className={cn("text-[10px]", active ? "text-primary-foreground/70" : "text-muted-foreground")}>
+                  <span
+                    className={cn(
+                      "text-[10px]",
+                      active ? "text-primary-foreground/70" : "text-muted-foreground",
+                    )}
+                  >
                     ≈ {formatRupiah(Math.ceil(perDay))}/hari
                   </span>
                 )}

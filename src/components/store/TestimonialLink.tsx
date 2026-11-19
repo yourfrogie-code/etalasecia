@@ -4,7 +4,13 @@ import { store } from "@/config/store";
 import { isExternalLinkReady } from "@/lib/whatsapp";
 
 /** Membuka tautan testimoni eksternal di tab baru. */
-export function TestimonialLink({ className, children }: { className?: string; children: ReactNode }) {
+export function TestimonialLink({
+  className,
+  children,
+}: {
+  className?: string;
+  children: ReactNode;
+}) {
   const ready = isExternalLinkReady(store.testimonialUrl);
   return (
     <a
@@ -15,7 +21,9 @@ export function TestimonialLink({ className, children }: { className?: string; c
       onClick={(e) => {
         if (!ready) {
           e.preventDefault();
-          toast("Link testimoni belum dipasang", { description: "Ganti [LINK_TESTIMONI_SAYA] dengan link testimoni kamu." });
+          toast("Link testimoni belum dipasang", {
+            description: "Ganti [LINK_TESTIMONI_SAYA] dengan link testimoni kamu.",
+          });
         }
       }}
     >

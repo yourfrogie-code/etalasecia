@@ -29,7 +29,9 @@ export function buildOrderMessage(lines: OrderLine[], note?: string): string {
   lines.forEach((l, i) => {
     out.push(`${i + 1}. *${l.productName}*`);
     out.push(`   Paket: ${l.planName} — ${l.optionLabel}`);
-    out.push(`   Jumlah: ${l.qty} x ${formatRupiah(l.unitPrice)} = ${formatRupiah(l.unitPrice * l.qty)}`);
+    out.push(
+      `   Jumlah: ${l.qty} x ${formatRupiah(l.unitPrice)} = ${formatRupiah(l.unitPrice * l.qty)}`,
+    );
   });
   out.push("");
   out.push(`*Total pembayaran: ${formatRupiah(orderTotal(lines))}*`);
@@ -46,7 +48,9 @@ export function whatsappUrl(message: string, number: string = store.whatsappNumb
 }
 
 export function chatAdminUrl(): string {
-  return whatsappUrl(`Halo kak ${store.name} 👋 Saya ingin bertanya tentang produk aplikasi premium.`);
+  return whatsappUrl(
+    `Halo kak ${store.name} 👋 Saya ingin bertanya tentang produk aplikasi premium.`,
+  );
 }
 
 export function isExternalLinkReady(url: string): boolean {

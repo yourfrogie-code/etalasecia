@@ -10,10 +10,20 @@ import { PlanPicker, defaultSelection, type PlanSelection } from "./PlanPicker";
 import { ProductVisual } from "./ProductVisual";
 import { useAddToCart } from "./useAddToCart";
 
-export function QuickAddDialog({ product, open, onOpenChange }: { product: Product; open: boolean; onOpenChange: (o: boolean) => void }) {
+export function QuickAddDialog({
+  product,
+  open,
+  onOpenChange,
+}: {
+  product: Product;
+  open: boolean;
+  onOpenChange: (o: boolean) => void;
+}) {
   const [sel, setSel] = useState<PlanSelection>(() => defaultSelection(product));
   const add = useAddToCart();
-  useEffect(() => { if (open) setSel(defaultSelection(product)); }, [open, product]);
+  useEffect(() => {
+    if (open) setSel(defaultSelection(product));
+  }, [open, product]);
   const found = findOption(product, sel.planId, sel.optionId);
 
   return (
@@ -32,16 +42,26 @@ export function QuickAddDialog({ product, open, onOpenChange }: { product: Produ
         <div className="sticky bottom-0 -mx-5 -mb-5 flex items-center justify-between gap-3 border-t-2 border-dashed border-border bg-card px-5 py-4">
           <div className="min-w-0">
             <p className="text-xs text-muted-foreground">Harga</p>
-            <p className="font-display text-xl font-bold">{found ? formatRupiah(found.option.price) : "-"}</p>
+            <p className="font-display text-xl font-bold">
+              {found ? formatRupiah(found.option.price) : "-"}
+            </p>
           </div>
           <div className="flex gap-2">
             <Button asChild variant="outlineInk" size="sm" className="h-11">
-              <Link to="/produk/$slug" params={{ slug: product.slug }} onClick={() => onOpenChange(false)}>Detail</Link>
+              <Link
+                to="/produk/$slug"
+                params={{ slug: product.slug }}
+                onClick={() => onOpenChange(false)}
+              >
+                Detail
+              </Link>
             </Button>
             <Button
               variant="sticker"
               className="h-11"
-              onClick={() => { if (add(product, sel.planId, sel.optionId)) onOpenChange(false); }}
+              onClick={() => {
+                if (add(product, sel.planId, sel.optionId)) onOpenChange(false);
+              }}
             >
               <ShoppingBag /> Tambah
             </Button>

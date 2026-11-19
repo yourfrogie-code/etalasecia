@@ -6,7 +6,7 @@ export function parseDurationDays(label: string): number | null {
   const m = label.match(/(\d+)\s*(hari|minggu|bulan|tahun)/i);
   if (!m) return null;
   const n = Number(m[1]);
-  const unit = m[2].toLowerCase();
+  const unit = (m[2] ?? "").toLowerCase();
   const mult = unit === "hari" ? 1 : unit === "minggu" ? 7 : unit === "bulan" ? 30 : 365;
   return n * mult;
 }
@@ -20,7 +20,9 @@ export function savingsPercent(plan: ProductPlan, option: PlanOption): number {
   if (!days || !option.price) return 0;
   const priced = plan.options
     .map((o) => ({ o, d: parseDurationDays(o.label) }))
-    .filter((x): x is { o: PlanOption; d: number } => !!x.d && x.o.price > 0 && x.o.available !== false);
+    .filter(
+      (x): x is { o: PlanOption; d: number } => !!x.d && x.o.price > 0 && x.o.available !== false,
+    );
   if (priced.length < 2) return 0;
   const shortest = priced.reduce((a, b) => (b.d < a.d ? b : a));
   if (shortest.d >= days) return 0;
@@ -39,6 +41,8 @@ export function availableOptions(product: Product) {
 /** Harga termurah yang tersedia (untuk "mulai dari"). */
 export function startingPrice(product: Product): number {
   const prices = availableOptions(product).map((x) => x.option.price);
+  const paid = prices.filter((p) => p > 0);
+  if (paid.length) return Math.min(...paid);
   return prices.length ? Math.min(...prices) : 0;
 }
 

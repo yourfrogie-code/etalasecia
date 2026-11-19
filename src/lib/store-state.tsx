@@ -1,4 +1,12 @@
-import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+  type ReactNode,
+} from "react";
 import { findOption, getProduct } from "@/data/products";
 import type { PlanOption, Product, ProductPlan } from "@/data/types";
 
@@ -17,8 +25,14 @@ export interface ResolvedCartItem extends CartItem {
   subtotal: number;
 }
 
-const KEYS = { cart: "cia.cart.v1", wish: "cia.wishlist.v1", recent: "cia.recent.v1", note: "cia.note.v1" };
-export const itemKey = (i: Pick<CartItem, "slug" | "planId" | "optionId">) => `${i.slug}|${i.planId}|${i.optionId}`;
+const KEYS = {
+  cart: "cia.cart.v1",
+  wish: "cia.wishlist.v1",
+  recent: "cia.recent.v1",
+  note: "cia.note.v1",
+};
+export const itemKey = (i: Pick<CartItem, "slug" | "planId" | "optionId">) =>
+  `${i.slug}|${i.planId}|${i.optionId}`;
 
 function read<T>(key: string, fallback: T): T {
   try {
@@ -36,7 +50,10 @@ export function mergeCart(items: CartItem[]): CartItem[] {
     if (it.qty <= 0) continue;
     const k = itemKey(it);
     const ex = map.get(k);
-    map.set(k, ex ? { ...ex, qty: Math.min(99, ex.qty + it.qty) } : { ...it, qty: Math.min(99, it.qty) });
+    map.set(
+      k,
+      ex ? { ...ex, qty: Math.min(99, ex.qty + it.qty) } : { ...it, qty: Math.min(99, it.qty) },
+    );
   }
   return [...map.values()];
 }
@@ -89,31 +106,56 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     setReady(true);
   }, []);
 
-  useEffect(() => { if (ready) localStorage.setItem(KEYS.cart, JSON.stringify(items)); }, [items, ready]);
-  useEffect(() => { if (ready) localStorage.setItem(KEYS.wish, JSON.stringify(wishlist)); }, [wishlist, ready]);
-  useEffect(() => { if (ready) localStorage.setItem(KEYS.recent, JSON.stringify(recent)); }, [recent, ready]);
-  useEffect(() => { if (ready) localStorage.setItem(KEYS.note, JSON.stringify(note)); }, [note, ready]);
+  useEffect(() => {
+    if (ready) localStorage.setItem(KEYS.cart, JSON.stringify(items));
+  }, [items, ready]);
+  useEffect(() => {
+    if (ready) localStorage.setItem(KEYS.wish, JSON.stringify(wishlist));
+  }, [wishlist, ready]);
+  useEffect(() => {
+    if (ready) localStorage.setItem(KEYS.recent, JSON.stringify(recent));
+  }, [recent, ready]);
+  useEffect(() => {
+    if (ready) localStorage.setItem(KEYS.note, JSON.stringify(note));
+  }, [note, ready]);
 
   const cart = useMemo(() => resolveCart(items), [items]);
 
-  const addToCart = useCallback((item: CartItem) => setItems((prev) => mergeCart([...prev, item])), []);
+  const addToCart = useCallback(
+    (item: CartItem) => setItems((prev) => mergeCart([...prev, item])),
+    [],
+  );
   const setQty = useCallback(
     (key: string, qty: number) =>
-      setItems((prev) => mergeCart(prev.map((i) => (itemKey(i) === key ? { ...i, qty: Math.max(0, Math.min(99, qty)) } : i)))),
+      setItems((prev) =>
+        mergeCart(
+          prev.map((i) => (itemKey(i) === key ? { ...i, qty: Math.max(0, Math.min(99, qty)) } : i)),
+        ),
+      ),
     [],
   );
   const changeVariant = useCallback(
     (key: string, planId: string, optionId: string) =>
-      setItems((prev) => mergeCart(prev.map((i) => (itemKey(i) === key ? { ...i, planId, optionId } : i)))),
+      setItems((prev) =>
+        mergeCart(prev.map((i) => (itemKey(i) === key ? { ...i, planId, optionId } : i))),
+      ),
     [],
   );
-  const removeItem = useCallback((key: string) => setItems((prev) => prev.filter((i) => itemKey(i) !== key)), []);
-  const clearCart = useCallback(() => { setItems([]); setNote(""); }, []);
+  const removeItem = useCallback(
+    (key: string) => setItems((prev) => prev.filter((i) => itemKey(i) !== key)),
+    [],
+  );
+  const clearCart = useCallback(() => {
+    setItems([]);
+    setNote("");
+  }, []);
 
   const toggleWish = useCallback(
     (slug: string) => {
       const added = !wishlist.includes(slug);
-      setWishlist((prev) => (prev.includes(slug) ? prev.filter((s) => s !== slug) : [slug, ...prev]));
+      setWishlist((prev) =>
+        prev.includes(slug) ? prev.filter((s) => s !== slug) : [slug, ...prev],
+      );
       return added;
     },
     [wishlist],

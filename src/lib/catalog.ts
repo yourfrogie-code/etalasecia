@@ -8,7 +8,14 @@ export function searchProducts(list: Product[], q: string): Product[] {
   const terms = q.toLowerCase().trim().split(/\s+/).filter(Boolean);
   if (!terms.length) return list;
   return list.filter((p) => {
-    const hay = [p.name, p.short, p.description, p.category, getCategory(p.category)?.name ?? "", ...p.plans.map((pl) => pl.name)]
+    const hay = [
+      p.name,
+      p.short,
+      p.description,
+      p.category,
+      getCategory(p.category)?.name ?? "",
+      ...p.plans.map((pl) => pl.name),
+    ]
       .join(" ")
       .toLowerCase();
     return terms.every((t) => hay.includes(t));
@@ -16,11 +23,11 @@ export function searchProducts(list: Product[], q: string): Product[] {
 }
 
 export interface CatalogFilter {
-  q?: string;
-  kategori?: string;
-  sort?: SortKey;
-  promo?: boolean;
-  tersedia?: boolean;
+  q?: string | undefined;
+  kategori?: string | undefined;
+  sort?: SortKey | undefined;
+  promo?: boolean | undefined;
+  tersedia?: boolean | undefined;
 }
 
 export function filterCatalog(list: Product[], f: CatalogFilter): Product[] {

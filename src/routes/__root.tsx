@@ -91,11 +91,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Cia Store — Toko Aplikasi Premium" },
-      { name: "description", content: "Cia Store: akun aplikasi premium murah & bergaransi sejak 2021. Pesan via WhatsApp." },
+      {
+        name: "description",
+        content:
+          "Cia Store: akun aplikasi premium murah & bergaransi sejak 2021. Pesan via WhatsApp.",
+      },
       { name: "author", content: "Cia Store" },
       { name: "theme-color", content: "#454a0c" },
       { property: "og:title", content: "Cia Store — Toko Aplikasi Premium" },
-      { property: "og:description", content: "Akun aplikasi premium murah & bergaransi sejak 2021." },
+      {
+        property: "og:description",
+        content: "Akun aplikasi premium murah & bergaransi sejak 2021.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],

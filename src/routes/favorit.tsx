@@ -33,12 +33,18 @@ function FavoritesPage() {
           <div className="rounded-[2rem] border-2 border-dashed border-ink bg-card p-10 text-center">
             <Heart className="mx-auto h-12 w-12 animate-wiggle text-mocha" />
             <p className="mt-3 font-display text-xl font-bold">Belum ada favorit</p>
-            <p className="text-sm text-muted-foreground">Ketuk ikon hati di kartu produk untuk menyimpannya di sini.</p>
-            <Button asChild variant="sticker" className="mt-5"><Link to="/katalog">Jelajahi katalog</Link></Button>
+            <p className="text-sm text-muted-foreground">
+              Ketuk ikon hati di kartu produk untuk menyimpannya di sini.
+            </p>
+            <Button asChild variant="sticker" className="mt-5">
+              <Link to="/katalog">Jelajahi katalog</Link>
+            </Button>
           </div>
         ) : (
           <div className="grid grid-cols-2 gap-3 sm:gap-5 md:grid-cols-3 lg:grid-cols-4">
-            {list.map((p, i) => <ProductCard key={p.slug} product={p} index={i} />)}
+            {list.map((p, i) => (
+              <ProductCard key={p.slug} product={p} index={i} />
+            ))}
           </div>
         )}
       </div>

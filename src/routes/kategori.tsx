@@ -9,7 +9,11 @@ export const Route = createFileRoute("/kategori")({
   head: () => ({
     meta: [
       { title: "Kategori Aplikasi — Cia Store" },
-      { name: "description", content: "Jelajahi aplikasi premium berdasarkan kategori: Entertainment, Music, Editing, AI, Education, Other, dan Game Needs." },
+      {
+        name: "description",
+        content:
+          "Jelajahi aplikasi premium berdasarkan kategori: Entertainment, Music, Editing, AI, Education, Other, dan Game Needs.",
+      },
       { property: "og:title", content: "Kategori Aplikasi — Cia Store" },
       { property: "og:description", content: "Pilih kategori aplikasi premium favoritmu." },
       { property: "og:type", content: "website" },
@@ -41,7 +45,9 @@ function CategoriesPage() {
                   </span>
                 </span>
                 <div className="min-w-0 flex-1">
-                  <p className="font-display text-xl font-bold">{c.emoji} {c.name}</p>
+                  <p className="font-display text-xl font-bold">
+                    {c.emoji} {c.name}
+                  </p>
                   <p className="text-sm text-muted-foreground">{c.blurb}</p>
                 </div>
                 <ArrowRight className="h-5 w-5 shrink-0 transition-transform group-hover:translate-x-1" />
@@ -49,12 +55,18 @@ function CategoriesPage() {
               <div className="mt-4 flex items-center gap-2">
                 <div className="flex -space-x-2">
                   {items.slice(0, 5).map((p) => (
-                    <span key={p.slug} className={`grid h-9 w-9 place-items-center rounded-full border-2 border-ink ${toneBg[p.tone]}`} title={p.name}>
+                    <span
+                      key={p.slug}
+                      className={`grid h-9 w-9 place-items-center rounded-full border-2 border-ink ${toneBg[p.tone]}`}
+                      title={p.name}
+                    >
                       <StoreIcon name={p.icon} className="h-4 w-4 text-ink" />
                     </span>
                   ))}
                 </div>
-                <span className="text-xs font-bold text-muted-foreground">{items.length} aplikasi</span>
+                <span className="text-xs font-bold text-muted-foreground">
+                  {items.length} aplikasi
+                </span>
               </div>
             </Link>
           );

@@ -50,6 +50,8 @@
 
   /* brand extras */
   --color-ink: var(--ink);
+  --color-deep: var(--deep);
+  --color-deep-foreground: var(--deep-foreground);
   --color-ink-foreground: var(--ink-foreground);
   --color-matcha: var(--matcha);
   --color-sage: var(--sage);
@@ -101,6 +103,8 @@
 
   --ink: oklch(0.27 0.045 112);
   --ink-foreground: oklch(0.96 0.03 110);
+  --deep: oklch(0.27 0.045 112);
+  --deep-foreground: oklch(0.96 0.03 110);
   --matcha: oklch(0.86 0.13 122);
   --sage: oklch(0.67 0.08 122);
   --cream: oklch(0.965 0.02 85);
@@ -159,8 +163,10 @@
 }
 
 .dark {
-  --ink: oklch(0.15 0.025 112);
-  --ink-foreground: oklch(0.93 0.06 118);
+  --ink: oklch(0.84 0.09 120);
+  --ink-foreground: oklch(0.2 0.04 112);
+  --deep: oklch(0.12 0.02 112);
+  --deep-foreground: oklch(0.93 0.04 110);
   --cream: oklch(0.24 0.03 112);
   --mocha: oklch(0.66 0.06 55);
   --blush: oklch(0.72 0.09 15);
@@ -208,7 +214,10 @@
     font-family: var(--font-sans);
     -webkit-tap-highlight-color: transparent;
   }
-  h1, h2, h3, h4 {
+  h1,
+  h2,
+  h3,
+  h4 {
     font-family: var(--font-display);
     letter-spacing: -0.01em;
   }
@@ -219,8 +228,12 @@
   background-image:
     radial-gradient(color-mix(in oklab, var(--ink) 12%, transparent) 1px, transparent 1.2px),
     radial-gradient(color-mix(in oklab, var(--card) 60%, transparent) 1px, transparent 1.2px);
-  background-size: 22px 22px, 31px 31px;
-  background-position: 0 0, 11px 13px;
+  background-size:
+    22px 22px,
+    31px 31px;
+  background-position:
+    0 0,
+    11px 13px;
 }
 
 @utility bg-checker {
@@ -235,14 +248,16 @@
 @utility scallop-bottom {
   --s: 22px;
   mask:
-    radial-gradient(var(--s) at 50% calc(100% - var(--s)), #000 99%, #0000 101%) 50% / calc(2 * var(--s)) 100% repeat-x,
+    radial-gradient(var(--s) at 50% calc(100% - var(--s)), #000 99%, #0000 101%) 50% /
+      calc(2 * var(--s)) 100% repeat-x,
     linear-gradient(#000 0 0) top / 100% calc(100% - var(--s)) no-repeat;
 }
 
 @utility scallop-top {
   --s: 16px;
   mask:
-    radial-gradient(var(--s) at 50% var(--s), #000 99%, #0000 101%) 50% / calc(2 * var(--s)) 100% repeat-x,
+    radial-gradient(var(--s) at 50% var(--s), #000 99%, #0000 101%) 50% / calc(2 * var(--s)) 100%
+      repeat-x,
     linear-gradient(#000 0 0) bottom / 100% calc(100% - var(--s)) no-repeat;
 }
 
@@ -273,32 +288,67 @@
 }
 
 @utility story-ring {
-  background: conic-gradient(from 200deg, var(--matcha), var(--sage), var(--mocha), var(--blush), var(--matcha));
+  background: conic-gradient(
+    from 200deg,
+    var(--matcha),
+    var(--sage),
+    var(--mocha),
+    var(--blush),
+    var(--matcha)
+  );
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0) rotate(-2deg); }
-  50% { transform: translateY(-10px) rotate(2deg); }
+  0%,
+  100% {
+    transform: translateY(0) rotate(-2deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(2deg);
+  }
 }
 @keyframes wiggle {
-  0%, 100% { transform: rotate(-6deg); }
-  50% { transform: rotate(6deg); }
+  0%,
+  100% {
+    transform: rotate(-6deg);
+  }
+  50% {
+    transform: rotate(6deg);
+  }
 }
 @keyframes marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }
 @keyframes pop {
-  0% { transform: scale(0.6); opacity: 0; }
-  100% { transform: scale(1); opacity: 1; }
+  0% {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 @keyframes rise {
-  from { transform: translateY(18px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
+  from {
+    transform: translateY(18px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
