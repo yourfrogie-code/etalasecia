@@ -63,7 +63,7 @@ function Hero() {
               <span className="relative z-10">{store.name}</span>
               <span
                 aria-hidden
-                className="absolute inset-x-0 bottom-1 -z-0 h-4 rounded-full bg-matcha"
+                className="absolute inset-x-0 bottom-1 -z-0 h-4 rounded-full bg-matcha dark:h-2 dark:bottom-0 dark:bg-mocha"
               />
             </span>
             {h.title.split(store.name)[1]}

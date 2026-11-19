@@ -27,7 +27,7 @@ export function SearchDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="top-[12%] max-w-lg translate-y-0 rounded-3xl border-2 border-ink bg-card p-4 shadow-sticker">
+      <DialogContent className="top-[10%] max-w-lg translate-y-0 rounded-3xl border-2 border-ink bg-card p-4 pt-12 shadow-sticker">
         <DialogTitle className="sr-only">Cari produk</DialogTitle>
         <DialogDescription className="sr-only">Ketik nama aplikasi untuk mencari</DialogDescription>
         <form

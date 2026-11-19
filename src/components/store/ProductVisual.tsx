@@ -61,7 +61,7 @@ export function ProductVisual({
         >
           <StoreIcon
             name={product.icon}
-            className={big ? "h-11 w-11" : small ? "h-5 w-5" : "h-8 w-8"}
+            className={big ? "h-11 w-11" : small ? "h-4 w-4" : "h-8 w-8"}
           />
         </div>
         {big && (

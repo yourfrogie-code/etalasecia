@@ -143,7 +143,7 @@ function ProductPage() {
 
         <div className="grid gap-6 md:grid-cols-[1fr_1.1fr] md:gap-10">
           <div className="md:sticky md:top-24 md:self-start">
-            <div className="relative aspect-square overflow-hidden rounded-[2rem] border-2 border-ink shadow-sticker">
+            <div className="relative aspect-[16/10] overflow-hidden rounded-[2rem] border-2 border-ink shadow-sticker md:aspect-square">
               <ProductVisual product={product} size="lg" />
               <ProductBadges product={product} className="absolute left-4 top-4" />
               <WishButton product={product} className="absolute right-4 top-4 h-11 w-11" />
