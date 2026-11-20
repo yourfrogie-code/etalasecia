@@ -32,6 +32,6 @@ use the editor.
 ## Project rules
 - Store identity (name, WhatsApp number, testimonial link, hero/profile/FAQ copy) lives only in `src/config/store.ts`; components read from it so rebranding needs no component edits.
 - Catalog lives in `src/data/products.ts` (prices written in thousands via `plan()` helper); seller notes are shown verbatim.
-- Cart, wishlist, recently viewed and order note persist in localStorage via `src/lib/store-state.tsx` (no backend by design); pure cart helpers live in `src/lib/cart.ts` and the context is a globalThis singleton so live updates never split provider/consumers.
+- Cart, wishlist, recently viewed and order note persist in localStorage via `src/lib/store-state.tsx` (no backend by design); pure cart helpers live in `src/lib/cart.ts` and app-wide contexts (store, theme) are globalThis singletons so live updates never split provider/consumers.
 - WhatsApp messages are built only in `src/lib/whatsapp.ts` (wa.me + encodeURIComponent); covered by `src/test/store-rules.test.ts`.
 - Colors are tokens in `src/styles.css`: `ink` flips light in dark mode (borders/tags), `deep` stays dark (footer, promo, announcement).
