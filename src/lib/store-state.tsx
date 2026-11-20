@@ -5,25 +5,10 @@ import {
   useEffect,
   useMemo,
   useState,
+  type Context,
   type ReactNode,
 } from "react";
-import { findOption, getProduct } from "@/data/products";
-import type { PlanOption, Product, ProductPlan } from "@/data/types";
-
-export interface CartItem {
-  slug: string;
-  planId: string;
-  optionId: string;
-  qty: number;
-}
-
-export interface ResolvedCartItem extends CartItem {
-  key: string;
-  product: Product;
-  plan: ProductPlan;
-  option: PlanOption;
-  subtotal: number;
-}
+import { itemKey, mergeCart, resolveCart, type CartItem, type ResolvedCartItem } from "./cart";
 
 const KEYS = {
   cart: "cia.cart.v1",
@@ -31,9 +16,6 @@ const KEYS = {
   recent: "cia.recent.v1",
   note: "cia.note.v1",
 };
-export const itemKey = (i: Pick<CartItem, "slug" | "planId" | "optionId">) =>
-  `${i.slug}|${i.planId}|${i.optionId}`;
-
 function read<T>(key: string, fallback: T): T {
   try {
     const raw = localStorage.getItem(key);
@@ -41,33 +23,6 @@ function read<T>(key: string, fallback: T): T {
   } catch {
     return fallback;
   }
-}
-
-/** Gabungkan item sama (produk+paket+durasi) dan buang yang qty ≤ 0. */
-export function mergeCart(items: CartItem[]): CartItem[] {
-  const map = new Map<string, CartItem>();
-  for (const it of items) {
-    if (it.qty <= 0) continue;
-    const k = itemKey(it);
-    const ex = map.get(k);
-    map.set(
-      k,
-      ex ? { ...ex, qty: Math.min(99, ex.qty + it.qty) } : { ...it, qty: Math.min(99, it.qty) },
-    );
-  }
-  return [...map.values()];
-}
-
-export function resolveCart(items: CartItem[]): ResolvedCartItem[] {
-  const out: ResolvedCartItem[] = [];
-  for (const it of items) {
-    const product = getProduct(it.slug);
-    if (!product) continue;
-    const found = findOption(product, it.planId, it.optionId);
-    if (!found || found.option.available === false) continue;
-    out.push({ ...it, key: itemKey(it), product, ...found, subtotal: found.option.price * it.qty });
-  }
-  return out;
 }
 
 interface StoreState {
@@ -89,7 +44,13 @@ interface StoreState {
   pushRecent: (slug: string) => void;
 }
 
-const Ctx = createContext<StoreState | null>(null);
+// Keep one context instance even when this module is re-evaluated by a live update;
+// otherwise the provider and its consumers can end up holding different contexts.
+const CTX_KEY = "__ciaStoreContext__";
+const globalRef = globalThis as typeof globalThis & {
+  [CTX_KEY]?: Context<StoreState | null>;
+};
+const Ctx = (globalRef[CTX_KEY] ??= createContext<StoreState | null>(null));
 
 export function StoreProvider({ children }: { children: ReactNode }) {
   const [ready, setReady] = useState(false);

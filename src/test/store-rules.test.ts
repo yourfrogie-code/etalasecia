@@ -3,7 +3,7 @@ import { getProduct, findOption } from "@/data/products";
 import { formatRupiah } from "@/lib/format";
 import { parseDurationDays, savingsPercent, startingPrice } from "@/lib/pricing";
 import { buildOrderMessage, normalizeWhatsappNumber, whatsappUrl } from "@/lib/whatsapp";
-import { mergeCart } from "@/lib/store-state";
+import { mergeCart } from "@/lib/cart";
 import { filterCatalog } from "@/lib/catalog";
 import { products } from "@/data/products";
 
