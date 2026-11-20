@@ -328,7 +328,7 @@ export const products: Product[] = [
     category: "entertainment",
     icon: "heart",
     tone: 2,
-    short: "Series & film BL/GL Asia.",
+    short: "Series & film pilihan Asia.",
     description: "Streaming series dan film dari GagaOOLala.",
     plans: [
       plan("SHARING", [

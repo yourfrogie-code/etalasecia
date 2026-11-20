@@ -1,6 +1,6 @@
 import { createFileRoute, Link, notFound, useRouter } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { ArrowLeft, Check, Copy, Info, Minus, Plus, Share2, ShoppingBag } from "lucide-react";
+import { ArrowLeft, Check, Copy, Info, Minus, Plus, ShoppingBag } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { findOption, getCategory, getProduct, products } from "@/data/products";
@@ -112,73 +112,67 @@ function ProductPage() {
     }
   };
 
-  const share = async () => {
-    const url = window.location.href;
-    if (navigator.share) {
-      try {
-        await navigator.share({ title: `${product.name} — Cia Store`, url });
-      } catch {
-        /* dibatalkan */
-      }
-    } else {
-      await navigator.clipboard.writeText(url);
-      toast.success("Link produk disalin");
-    }
-  };
-
   const related = products
     .filter((p) => p.category === product.category && p.slug !== product.slug)
     .slice(0, 4);
 
   return (
     <>
-      <div className="mx-auto max-w-6xl px-4 py-6">
+      <div className="mx-auto max-w-3xl px-4 py-5">
         <button
           type="button"
           onClick={() => router.history.back()}
-          className="mb-4 inline-flex items-center gap-1 font-display text-sm font-semibold hover:underline"
+          className="mb-3 inline-flex items-center gap-1 font-display text-sm font-semibold hover:underline"
         >
           <ArrowLeft className="h-4 w-4" /> Kembali
         </button>
 
-        <div className="grid gap-6 md:grid-cols-[1fr_1.1fr] md:gap-10">
-          <div className="md:sticky md:top-24 md:self-start">
-            <div className="relative aspect-[16/10] overflow-hidden rounded-[2rem] border-2 border-ink shadow-sticker md:aspect-square">
-              <ProductVisual product={product} size="lg" />
-              <ProductBadges product={product} className="absolute left-4 top-4" />
-              <WishButton product={product} className="absolute right-4 top-4 h-11 w-11" />
-            </div>
-            <div className="mt-4 grid grid-cols-2 gap-2">
-              <Button variant="outlineInk" onClick={copyInfo} className="h-11">
-                {copied ? <Check /> : <Copy />} Salin info
-              </Button>
-              <Button variant="outlineInk" onClick={share} className="h-11">
-                <Share2 /> Bagikan
-              </Button>
-            </div>
-          </div>
-
+        <div>
           <div className="min-w-0 animate-rise">
-            <Link
-              to="/katalog"
-              search={{ kategori: product.category }}
-              className="text-xs font-bold uppercase tracking-wider text-muted-foreground hover:underline"
-            >
-              {cat?.emoji} {cat?.name}
-            </Link>
-            <h1 className="mt-1 font-display text-4xl font-bold leading-tight">{product.name}</h1>
-            <p className="mt-2 text-muted-foreground">{product.description}</p>
-            <p
-              className={`mt-2 inline-flex items-center gap-1.5 text-sm font-bold ${product.available !== false ? "text-success" : "text-muted-foreground"}`}
-            >
-              <span
-                className={`h-2 w-2 rounded-full ${product.available !== false ? "bg-success" : "bg-muted-foreground"}`}
-              />
-              {product.available !== false ? "Tersedia" : "Tidak tersedia"}
-            </p>
+            <div className="flex items-center gap-3 rounded-[1.5rem] border-2 border-ink bg-card p-3 shadow-sticker-sm">
+              <div className="h-16 w-16 shrink-0 overflow-hidden rounded-2xl border-2 border-ink sm:h-20 sm:w-20">
+                <ProductVisual product={product} size="sm" />
+              </div>
+              <div className="min-w-0 flex-1">
+                <Link
+                  to="/katalog"
+                  search={{ kategori: product.category }}
+                  className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground hover:underline"
+                >
+                  {cat?.emoji} {cat?.name}
+                </Link>
+                <h1 className="truncate font-display text-xl font-bold leading-tight sm:text-2xl">
+                  {product.name}
+                </h1>
+                <div className="mt-1 flex flex-wrap items-center gap-1.5">
+                  <span
+                    className={`inline-flex items-center gap-1 text-xs font-bold ${product.available !== false ? "text-success" : "text-muted-foreground"}`}
+                  >
+                    <span
+                      className={`h-2 w-2 rounded-full ${product.available !== false ? "bg-success" : "bg-muted-foreground"}`}
+                    />
+                    {product.available !== false ? "Tersedia" : "Tidak tersedia"}
+                  </span>
+                  <ProductBadges product={product} />
+                </div>
+              </div>
+              <div className="flex shrink-0 flex-col items-end gap-1.5">
+                <WishButton product={product} />
+                <button
+                  type="button"
+                  onClick={copyInfo}
+                  className="inline-flex h-8 items-center gap-1 rounded-full border-2 border-ink bg-background px-2.5 font-display text-xs font-bold hover:bg-secondary"
+                >
+                  {copied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}{" "}
+                  Salin
+                </button>
+              </div>
+            </div>
+
+            <p className="mt-3 text-sm text-muted-foreground">{product.description}</p>
 
             {product.note && (
-              <div className="mt-4 flex gap-2 rounded-2xl border-2 border-dashed border-mocha bg-card p-3 text-sm">
+              <div className="mt-3 flex gap-2 rounded-2xl border-2 border-dashed border-mocha bg-card p-3 text-sm">
                 <Info className="mt-0.5 h-4 w-4 shrink-0 text-mocha" />
                 <p>
                   <b className="font-display">Keterangan:</b> {product.note}
@@ -186,7 +180,7 @@ function ProductPage() {
               </div>
             )}
 
-            <div className="mt-6 rounded-[1.75rem] border-2 border-ink bg-card p-4 sm:p-5">
+            <div className="mt-4 rounded-[1.75rem] border-2 border-ink bg-card p-4 sm:p-5">
               <PlanPicker product={product} value={sel} onChange={setSel} />
 
               <div className="mt-5 flex items-center justify-between gap-3 border-t-2 border-dashed border-border pt-4">

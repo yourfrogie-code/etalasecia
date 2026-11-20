@@ -95,7 +95,7 @@ function Hero() {
         </div>
 
         <div className="relative">
-          <div className="relative rotate-2 rounded-[2rem] border-2 border-ink bg-card p-2.5 shadow-sticker transition-transform duration-500 hover:rotate-0">
+          <div className="relative rounded-[2rem] border-2 border-ink bg-card p-2.5 shadow-sticker">
             <img
               src={store.headerImage}
               alt={`Banner ${store.name}`}
@@ -105,7 +105,7 @@ function Hero() {
             <div className="flex items-center justify-between px-2 pb-1 pt-3">
               <span className="font-script text-lg text-mocha">photobooth ✿</span>
               <span className="font-display text-xs font-bold text-muted-foreground">
-                #{store.handle.replace("@", "")}
+                {store.hashtag}
               </span>
             </div>
           </div>

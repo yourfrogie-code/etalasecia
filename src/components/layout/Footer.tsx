@@ -1,5 +1,4 @@
 import { Link } from "@tanstack/react-router";
-import { Instagram, Music2 } from "lucide-react";
 import { store } from "@/config/store";
 import { chatAdminUrl } from "@/lib/whatsapp";
 import { TestimonialLink } from "@/components/store/TestimonialLink";
@@ -80,11 +79,7 @@ export function Footer() {
                 aria-label={s.label}
                 className="grid h-10 w-10 place-items-center rounded-full border-2 border-matcha/50 hover:bg-matcha hover:text-deep"
               >
-                {s.label === "Instagram" ? (
-                  <Instagram className="h-4 w-4" />
-                ) : (
-                  <Music2 className="h-4 w-4" />
-                )}
+                <XIcon className="h-4 w-4" />
               </a>
             ))}
           </div>
@@ -94,5 +89,13 @@ export function Footer() {
         © {new Date().getFullYear()} {store.name}. Dibuat dengan 💚 sejak {store.since}.
       </div>
     </footer>
+  );
+}
+
+function XIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden className={className}>
+      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+    </svg>
   );
 }

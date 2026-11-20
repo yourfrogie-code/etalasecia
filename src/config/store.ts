@@ -7,7 +7,8 @@ import headerAsset from "@/assets/cia-store-header.webp.asset.json";
 
 export const store = {
   name: "Cia Store",
-  handle: "@ciastore.id",
+  handle: "@etalasecia",
+  hashtag: "#langganandicia",
   since: 2021,
   tagline: "Toko aplikasi premium yang lucu, murah, dan amanah",
   logo: logoAsset.url,
@@ -36,15 +37,14 @@ export const store = {
   profile: {
     bio: "Akun premium legal & bergaransi ✿ Fast respon ✿ Sejak 2021 menemani hiburan & kerjaanmu.",
     info: [
-      { icon: "clock", label: "Jam operasional", value: "08.00 – 22.00 WIB" },
-      { icon: "shield", label: "Garansi", value: "Sesuai keterangan produk" },
-      { icon: "wallet", label: "Pembayaran", value: "QRIS, e-wallet & transfer bank" },
+      { icon: "clock", label: "Jam operasional", value: "10.00 – 00.00 WIB" },
+      { icon: "shield", label: "Garansi", value: "Sesuai keterangan" },
+      { icon: "wallet", label: "Pembayaran", value: "QRIS" },
     ],
   },
 
   social: [
-    { label: "Instagram", href: "https://instagram.com/" },
-    { label: "TikTok", href: "https://tiktok.com/" },
+    { label: "Twitter / X", href: "https://x.com/ciajajan" },
   ],
 
   faq: [
@@ -54,7 +54,7 @@ export const store = {
     },
     {
       q: "Bagaimana cara melakukan pembayaran?",
-      a: "Setelah pesananmu kami terima di WhatsApp, admin akan mengirimkan detail pembayaran (QRIS, e-wallet, atau transfer bank).",
+      a: "Setelah pesananmu kami terima di WhatsApp, admin akan mengirimkan detail pembayaran via QRIS.",
     },
     {
       q: "Berapa lama proses pesanan?",
