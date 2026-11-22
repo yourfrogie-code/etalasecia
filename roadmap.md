@@ -7,4 +7,4 @@
 - [x] Wishlist, recently viewed, copy info, toast, loading, back-to-top, floating WA, mobile nav
 - [x] Tests for pricing + WA message
 - [x] Revisi: teks GagaOOLala, hero lurus, pengumuman tanpa tutup, @etalasecia, #langganandicia, jam/garansi/QRIS, sosial X saja, detail produk ringkas tanpa Bagikan
-- [ ] Waiting on user: testimonial link (sedang direkam)
+- [x] Link testimoni (Google Drive) + bio profil baru

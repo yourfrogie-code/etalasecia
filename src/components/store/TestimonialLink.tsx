@@ -22,7 +22,7 @@ export function TestimonialLink({
         if (!ready) {
           e.preventDefault();
           toast("Link testimoni belum dipasang", {
-            description: "Ganti [LINK_TESTIMONI_SAYA] dengan link testimoni kamu.",
+            description: "Isi testimonialUrl di pengaturan toko dengan link testimoni kamu.",
           });
         }
       }}

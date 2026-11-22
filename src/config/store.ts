@@ -17,7 +17,7 @@ export const store = {
   /** Nomor WhatsApp toko (boleh diawali 0, +62, atau 62). */
   whatsappNumber: "081369272965",
   /** Tautan halaman testimoni milik toko. */
-  testimonialUrl: "[LINK_TESTIMONI_SAYA]",
+  testimonialUrl: "https://drive.google.com/drive/folders/1JoLfm8sMZKIIoVQ5Q6eF0BGEP9Av4KnS",
 
   announcement: [
     "Selamat datang di Cia Store ✿ akun premium bergaransi",
@@ -35,7 +35,7 @@ export const store = {
   },
 
   profile: {
-    bio: "Akun premium legal & bergaransi ✿ Fast respon ✿ Sejak 2021 menemani hiburan & kerjaanmu.",
+    bio: "💭! — haap 𓂋 h𝑎ppy with the carᧉ         𝓸𝒻 trustworthy ㅤ! ¡  ꒱  pre𝑚ium apps fa𝐬t responsᧉ᭤ since 2021 🐻🥛",
     info: [
       { icon: "clock", label: "Jam operasional", value: "10.00 – 00.00 WIB" },
       { icon: "shield", label: "Garansi", value: "Sesuai keterangan" },

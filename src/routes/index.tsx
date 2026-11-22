@@ -171,7 +171,7 @@ function Profile() {
             </dl>
           </div>
         </div>
-        <p className="mt-5 text-sm sm:text-base">{store.profile.bio}</p>
+        <p className="mt-5 whitespace-pre-wrap break-words text-sm sm:text-base">{store.profile.bio}</p>
         <div className="mt-4 grid gap-2 sm:grid-cols-3">
           {store.profile.info.map((i) => {
             const Icon = infoIcons[i.icon];
