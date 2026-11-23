@@ -315,9 +315,12 @@ function Home() {
           <p className="mt-2 font-script text-xl">kata mereka tentang kami</p>
           <p className="font-display text-4xl font-bold tracking-wide sm:text-6xl">TESTIMONI</p>
           <span className="mt-4 inline-flex items-center gap-2 rounded-full border-2 border-ink bg-card px-5 py-2.5 font-display text-sm font-bold text-foreground">
-            Lihat testimoni{" "}
+            Lihat GDrive{" "}
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
           </span>
+          <p className="mt-2 font-script text-sm text-deep opacity-70">
+            Google Drive memuat beberapa detik ya ✿
+          </p>
         </TestimonialLink>
       </section>
 
