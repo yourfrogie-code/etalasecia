@@ -304,7 +304,7 @@ function Home() {
       <RecentlyViewed />
 
       <section className="mx-auto max-w-6xl px-4 py-10">
-        <TestimonialLink className="group relative block overflow-hidden rounded-[2rem] border-2 border-ink bg-blush p-8 text-center text-blush-foreground shadow-sticker transition-transform hover:-translate-y-1 sm:p-12">
+        <TestimonialLink className="group relative block overflow-hidden rounded-[2rem] border-2 border-ink bg-matcha p-8 text-center text-deep shadow-sticker transition-transform hover:-translate-y-1 sm:p-12">
           <span aria-hidden className="absolute left-6 top-4 font-display text-4xl opacity-40">
             ♡
           </span>
